@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         Schema::create('jabatan', function (Blueprint $table) {
-            $table->id('nip');
+            $table->id();
             $table->integer('nip');
             $table->boolean('is_kaprodi');
             $table->boolean('is_kajur');

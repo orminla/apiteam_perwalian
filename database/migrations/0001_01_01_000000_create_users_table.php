@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id(); //NIM, NIP, ID MAHASISWA
             $table->enum('role',['mahasiswa','dosen','staff'])->default('mahasiswa');
-            $table->string('token');
+            $table->string('email');
+            $table->dateTime('email_verified_at');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
