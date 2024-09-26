@@ -14,7 +14,7 @@ class AuthController extends Controller
             return redirect('dashboard');
         }
 
-        return view('Auth.page.login');
+        return view('auth.page.login');
     }
     public function authenticate(Request $request): RedirectResponse
     {

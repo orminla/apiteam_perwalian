@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('nip');
             $table->string('nama');
             $table->string('no_hp');
-            $table->string('email');
             $table->timestamps();
         });
 
