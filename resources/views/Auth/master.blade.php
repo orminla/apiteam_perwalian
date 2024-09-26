@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DATPUS</title>
+    <title>@yield('title', 'MasterAuth')</title>
 </head>
 <body>
-    @if(Auth::check())
-        {{Auth::user()->id}}
-        <h2>LOGGED IN</h2>
-    @endif
+    @yield('content')
 </body>
 </html>

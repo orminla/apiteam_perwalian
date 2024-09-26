@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
+    public function login() {
+        if (Auth::check()) {
+            return redirect('dashboard');
+        }
+
+        return view('Auth.page.login');
+    }
     public function authenticate(Request $request): RedirectResponse
     {
+        // dd($request);
         $credentials = $request->validate([
             'id' => ['required'],
             'password' => ['required']
@@ -25,5 +33,9 @@ class LoginController extends Controller
         return back()->withErrors([
             'err' => 'ID atau Password yang anda masukkan salah!'
         ]);
+    }
+    public function logout() {
+        Auth::logout();
+        return redirect()->intended('login');
     }
 }
