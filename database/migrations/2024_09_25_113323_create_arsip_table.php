@@ -12,24 +12,14 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('admin', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('no_hp');
-            $table->string('email');
-            $table->timestamps();
-        });
-
         Schema::create('dokumen', function (Blueprint $table) {
             $table->id();
-            $table->string('id_admin');
-            $table->string('id_kategori');
+            $table->integer('id_admin');
+            $table->integer('id_kategori');
             $table->string('judul');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->string('file_path');
-            $table->string('nomor_unik');
-            $table->string('created_at');
-            $table->string('update_at');
+            $table->integer('nomor_unik');
             $table->string('upload_by');
             $table->timestamps();
         });

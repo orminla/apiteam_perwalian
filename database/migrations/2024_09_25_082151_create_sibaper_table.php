@@ -21,8 +21,8 @@ return new class extends Migration
         });
 
         Schema::create('jadwal', function (Blueprint $table) {
-            $table->id('nip');
             $table->id('id_jadwal');
+            $table->integer('nip');
             $table->integer('id_kelas');
             $table->integer('id_ruang');
             $table->string('kode_matkul');
