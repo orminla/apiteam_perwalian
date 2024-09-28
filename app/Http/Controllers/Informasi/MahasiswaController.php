@@ -26,6 +26,9 @@ class MahasiswaController extends Controller
         }
         try {
             $dmhs = (new FastExcel)->import($file, function($line) {
+                if (User::where('id', $line['NIM'])->exists()) {
+                    throw new \Exception('Data Sudah Ada');
+                }
                 Mahasiswa::create([
                     'nim' => $line['NIM'],
                     'nama' => $line['NAMA'],
@@ -42,11 +45,9 @@ class MahasiswaController extends Controller
                 ]);
             });
 
-
-
-            return redirect()->back()->with('success','Data Berhasil ditambah');
-        } catch (e) {
-            return redirect()->back()->with('error', 'Data Gagal ditambah');
+            return redirect('data-mahasiswa')->with('success','Data Berhasil ditambah');
+        } catch (\Exception $e) {
+            return redirect('data-mahasiswa')->with('error', 'Data Gagal Ditambahkan');
         }
     }
 }

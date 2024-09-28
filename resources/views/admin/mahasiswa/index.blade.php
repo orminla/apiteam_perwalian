@@ -27,6 +27,12 @@
             Halo, {{Auth::user()->data_pribadi->nama}} <br> <a href="{{route('logout')}}">LOG OUT</a>
         @endif
     </div>
+    @session('success')
+        <h1>Berhasil</h1>
+    @endsession
+    @session('error')
+        <h1>{{Session::get('error')}}</h1>
+    @endsession
 
     <table>
         <thead>
