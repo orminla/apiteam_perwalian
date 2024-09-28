@@ -16,8 +16,7 @@ class AuthController extends Controller
 
         return view('auth.page.login');
     }
-    public function authenticate(Request $request): RedirectResponse
-    {
+    public function authenticate(Request $request) {
         // dd($request);
         $credentials = $request->validate([
             'id' => ['required'],

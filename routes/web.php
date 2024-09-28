@@ -8,6 +8,7 @@ Route::get('/dashboard', function(){
 });
 
 Route::get('/data-mahasiswa', [MahasiswaController::class, 'index'])->name('data-mahasiswa');
-Route::get('/tambah-data-mahasiswa', [MahasiswaController::class, 'index'])->name('tambah-data-mahasiswa');
+Route::get('/tambah-data-mahasiswa', [MahasiswaController::class, 'create'])->name('tambah-data-mahasiswa');
+Route::post('/import-data-mahasiswa', [MahasiswaController::class, 'import'])->name('import-data-mahasiswa');
 
 require __DIR__ .'\auth.php';

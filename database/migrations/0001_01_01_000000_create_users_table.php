@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); //NIM, NIP, ID MAHASISWA
             $table->enum('role',['mahasiswa','dosen','staff'])->default('mahasiswa');
             $table->string('email');
-            $table->dateTime('email_verified_at');
+            $table->dateTime('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
