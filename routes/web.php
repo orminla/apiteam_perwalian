@@ -12,3 +12,4 @@ Route::get('/tambah-data-mahasiswa', [MahasiswaController::class, 'create'])->na
 Route::post('/import-data-mahasiswa', [MahasiswaController::class, 'import'])->name('import-data-mahasiswa');
 
 require __DIR__ .'\auth.php';
+require __DIR__ .'\api\api.php';

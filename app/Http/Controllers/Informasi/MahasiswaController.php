@@ -45,7 +45,7 @@ class MahasiswaController extends Controller
                 ]);
             });
 
-            return redirect('data-mahasiswa')->with('success','Data Berhasil ditambah');
+            return redirect('data-mahasiswa')->with('success','Data Berhasil Ditambahkan');
         } catch (\Exception $e) {
             return redirect('data-mahasiswa')->with('error', 'Data Gagal Ditambahkan');
         }
