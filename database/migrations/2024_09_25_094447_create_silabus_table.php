@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('referensi', function (Blueprint $table) {
             $table->id('id_referensi');
-            $table->timestamps('buku_referensi');
-            $table->timmestamps();
+            $table->string('buku_referensi');
+            $table->timestamps();
         });
 
         // Membuat tabel rps
@@ -24,18 +24,18 @@ return new class extends Migration
             $table->unsignedBiginteger('kode_matkul');
             $table->unsignedBiginteger('id_referensi');
             $table->text('deskripsi');
-            $table->text('cp_prodi');
-            $table->text('cp_matkul');
-            $table->text('bobot_penilaian');
-            $table->text('metode_penilaian');
+            $table->string('cp_prodi');
+            $table->string('cp_matkul');
+            $table->string('bobot_penilaian');
+            $table->string('metode_penilaian');
             $table->integer('minggu_ke');
             $table->time('waktu');
-            $table->text('cp_tahapan_matkul');
-            $table->text('bahan_kajian');
-            $table->text('sub_bahan_kajian');
-            $table->text('bentuk_pembelajaran');
-            $table->text('kriterian_penilaian');
-            $table->text('bobot_materi');
+            $table->string('cp_tahapan_matkul');
+            $table->string('bahan_kajian');
+            $table->string('sub_bahan_kajian');
+            $table->string('bentuk_pembelajaran');
+            $table->string('kriterian_penilaian');
+            $table->string('bobot_materi');
             $table->date('tanggal_pembuatan');
             $table->date('tanggal_refrensi')->nullable();
             $table->boolean('status_persetujuan');
