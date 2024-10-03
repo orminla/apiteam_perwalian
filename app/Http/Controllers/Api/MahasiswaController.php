@@ -14,10 +14,12 @@ class MahasiswaController extends BaseController
         $data = Mahasiswa::all();
         foreach ($data as $mhs) {
             // $mhs->put('nama_jurusan', $mhs->jurusan->nama_jurusan);
-            $mhs->jurusan;
-            $mhs->dosen;
+            $mhs->prodi;
+            $mhs->prodi->jurusan;
+            $mhs->dosen_pembimbing;
             $mhs->kelas;
         }
+        $data = $data->except(['id_kelas','nip','kode_prodi']);
         return $this->sendResponse(new MahasiswaCollection($data), 'Sukses mengambil data');
     }
 

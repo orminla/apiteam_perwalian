@@ -13,20 +13,20 @@ class Mahasiswa extends Model
     protected $fillable = [
         'nim',
         'nama',
-        'kode_jurusan',
+        'kode_prodi',
         'semester',
         'id_kelas',
         'nip',
         'no_hp',
     ];
 
-    public function jurusan() {
-        return $this->belongsTo(Jurusan::class, 'kode_jurusan', 'kode_jurusan');
+    public function prodi() {
+        return $this->belongsTo(Prodi::class, 'kode_prodi', 'kode_prodi');
     }
     public function kelas() {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id_kelas');
     }
-    public function dosen() {
+    public function dosen_pembimbing() {
         return $this->belongsTo(Dosen::class, 'nip', 'nip');
     }
 }
