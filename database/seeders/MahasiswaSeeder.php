@@ -25,6 +25,7 @@ class MahasiswaSeeder extends Seeder
             'kode_jurusan' => 'TIF',
             'semester'=> 5,
             'id_kelas'=> 3,
+            'nip' => 12221,
             'no_hp'=> '0895411898900',
         ]);
     }

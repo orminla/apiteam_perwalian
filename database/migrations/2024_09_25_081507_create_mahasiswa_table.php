@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kode_jurusan');
             $table->integer('semester');
             $table->integer('id_kelas');
+            $table->integer('nip');
             $table->string('no_hp');
             $table->timestamps();
         });
