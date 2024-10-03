@@ -16,6 +16,7 @@ class Mahasiswa extends Model
         'kode_jurusan',
         'semester',
         'id_kelas',
+        'nip',
         'no_hp',
     ];
 
@@ -24,5 +25,8 @@ class Mahasiswa extends Model
     }
     public function kelas() {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id_kelas');
+    }
+    public function dosen() {
+        return $this->belongsTo(Dosen::class, 'nip', 'nip');
     }
 }

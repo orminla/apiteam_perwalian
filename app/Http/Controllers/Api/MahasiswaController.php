@@ -12,6 +12,12 @@ class MahasiswaController extends BaseController
 {
     public function index() {
         $data = Mahasiswa::all();
+        foreach ($data as $mhs) {
+            // $mhs->put('nama_jurusan', $mhs->jurusan->nama_jurusan);
+            $mhs->jurusan;
+            $mhs->dosen;
+            $mhs->kelas;
+        }
         return $this->sendResponse(new MahasiswaCollection($data), 'Sukses mengambil data');
     }
 
