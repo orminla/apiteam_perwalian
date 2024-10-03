@@ -17,13 +17,13 @@ class DosenSeeder extends Seeder
         Dosen::create([
             'nip' => 12221,
             'nama' => "Adam",
-            "089512345678"
+            'no_hp' =>" 089512345678"
         ]);
 
         Jabatan::create([
             'nip' => 12221,
-            'is_prodi' => false,
-            'is_Kajur' => false
+            'is_kaprodi' => false,
+            'is_kajur' => false
         ]);
     }
 }
