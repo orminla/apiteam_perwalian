@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         // User::create([
         //     'id' => 3202216074,
         //     'role' => 'mahasiswa',
@@ -23,6 +22,6 @@ class DatabaseSeeder extends Seeder
         //     'password'=> Hash::make('12341234'),
         // ]);
         // $this->call(MahasiswaSeeder::class);
-        $this->call(KelasSeeder::class);
+        // $this->call(KelasSeeder::class);
     }
 }
