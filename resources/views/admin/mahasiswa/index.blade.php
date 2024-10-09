@@ -50,7 +50,7 @@
                 <tr>
                     <td>{{$mhs->nim}}</td>
                     <td>{{$mhs->nama}}</td>
-                    <td>{{$mhs->kode_jurusan}} || {{$mhs->jurusan->nama_jurusan}}</td>
+                    <td>{{$mhs->kode_prodi}} || {{$mhs->prodi->nama_prodi}}</td>
                     <td>{{$mhs->semester}}</td>
                     <td>{{$mhs->kelas->abjad_kelas}}</td>
                     <td>{{$mhs->no_hp}}</td>

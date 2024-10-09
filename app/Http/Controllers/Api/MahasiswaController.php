@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Resources\Api\MahasiswaCollection;
-use Response;
-use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Http\Controllers\Api\BaseController;
+use Validator;
 
 class MahasiswaController extends BaseController
 {
@@ -23,33 +23,27 @@ class MahasiswaController extends BaseController
         return $this->sendResponse(new MahasiswaCollection($data), 'Sukses mengambil data');
     }
 
-    public function edit(Request $request) {
+    public function update(Request $request, Mahasiswa $mahasiswa) {
 
-        try {
+        $input = $request->all();
 
-            $update = Mahasiswa::where('nim', $request->nim)->update([
-                'nama' => $request->nama,
-                /// others
-            ]);
+        $validator = Validator::make($input, [
+            'nama' => 'required',
+        ]);
 
-        } catch (\Exception $e) {
-
-            return 'error';
-
+        if($validator->fails()){
+            return $this->sendError('Validation Error.',$validator->errors());
         }
+
+        $mahasiswa->name = $input['nama'];
+        $mahasiswa->save();
+
+        return $this->sendResponse(new MahasiswaCollection($mahasiswa), 'Product updated successfully.');
     }
 
-    public function delete(Request $request) {
+    public function destroy(Mahasiswa $mahasiswa) {
+        $mahasiswa->delete();
 
-        try {
-
-            $getId = Mahasiswa::findOrFail($request->id)->delete();
-            return 'success';
-
-        } catch (\Exception $e) {
-
-            return 'error';
-
-        }
+        return $this->sendResponse([], 'data mahasiswa sukses');
     }
 }
