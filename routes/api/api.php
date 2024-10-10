@@ -7,7 +7,13 @@ use App\Http\Controllers\Api\MahasiswaController;
 
 // Route::middleware(['auth:sanctum'])->group( function () {
     Route::GET('/mahasiswa', [IntegrationController::class , 'mahasiswa']);
+    Route::GET('/mahasiswa/{id}', [IntegrationController::class , 'mahasiswa_by_id']);
     Route::POST('/mahasiswa', [IntegrationController::class, 'mahasiswa_create']);
+    Route::POST('/mahasiswa-update/{id}', [IntegrationController::class, 'mahasiswa_update']);
+    Route::POST('/mahasiswa-delete/{id}', [IntegrationController::class, 'mahasiswa_delete']);
+
+    Route::GET('/dosen', [IntegrationController::class, 'dosen']);
+    Route::POST('/dosen', [IntegrationController::class, 'dosen_create']);
 // });
 
 Route::prefix('sibaper')->group(function() {

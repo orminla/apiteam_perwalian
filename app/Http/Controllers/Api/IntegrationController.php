@@ -8,6 +8,7 @@ use Hash;
 use Illuminate\Http\Request;
 use App\Http\Resources\Api\MahasiswaCollection;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
 
 class IntegrationController extends BaseController
 {
@@ -36,6 +37,11 @@ class IntegrationController extends BaseController
             $dat->kelas->makeHidden(['id_kelas']);
         }
         return $this->sendResponse($data, 'Sukses mengambil data');
+    }
+
+    public function mahasiswa_by_id($id) {
+        $data = Mahasiswa::where('nim', $id)->get();
+        return $this->sendResponse($data, 'Data Berhasil diambil');
     }
 
     public function mahasiswa_create(Request $request) {
@@ -76,8 +82,76 @@ class IntegrationController extends BaseController
         return $this->sendResponse($data, 'Sukses Membuat Data');
     }
 
-    public function mahasiswa_update(Request $request) {
-        // Nanti validasi
-        $data = Mahasiswa::where('nim', $request->id)->get();
+    public function dosen() {
+        $data = Dosen::all();
+
+        return $this->sendResponse($data, 'Data berhasil diambil!');
+    }
+
+    public function dosen_create(Request $request) {
+        $data = $request->validate([
+            'id' => 'required',
+            'nama' => 'required',
+            'role' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'c_password' => 'required|same:password',
+            'no_hp' => 'required'
+        ]);
+
+        User::create([
+            'id' => $request->id,
+            'role' => $request->role,
+            'email' => $request->email,
+            'password'  => $request->password
+        ]);
+
+        Dosen::create([
+            'nip' => $request->id,
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        unset($data['password']);
+        unset($data['c_password']);
+
+        return $this->sendResponse($data, 'Data dan Akun dosen berhasil disimpan!');
+    }
+
+    public function mahasiswa_update(Request $request, $id) {
+        $data = $request->validate([
+            'nim',
+            'email' => 'email|unique:users',
+            'password',
+            'c_password' => 'same:password',
+            'kode_prodi',
+            'semester',
+            'id_kelas',
+            'nip',
+            'no_hp',
+        ]);
+        Mahasiswa::where('nim', $id)->update([
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'kode_prodi' => $request->kode_prodi,
+            'semester' => $request->semester,
+            'id_kelas' => $request->id_kelas,
+            'nip' => $request->nip,
+            'no_hp' => $request->no_hp
+        ]);
+        User::where('id', $id)->update([
+            'nim' => $request->nim,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        return $this->sendResponse($request->id, 'Data sukses di ubah!');
+    }
+
+    public function mahasiswa_delete($id) {
+        Mahasiswa::where('nim', $id)->delete();
+        User::where('id', $id)->delete();
+
+        return $this->sendResponse('Sukses Menghapus Data', 'YEY!');
     }
 }
