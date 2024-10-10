@@ -10,46 +10,69 @@ use App\Models\Rekomendasi;
 
 class RekomendasiController extends BaseController
 {
-    public function index()
+    public function rekomendasi()
     {
-        $data       = Rekomendasi::all();
-        foreach ($data as $rek) {
-            $rek -> mahasiswa;
-            $rek -> kelas;
-
-            $data = $data->except(['tanggal','topik_pertemuan']);
-            return $this->sendResponse($data, 'Sukses mengambil data');
-        }
+        $data = Rekomendasi::select([
+            'nim','keterangan','tanggal_pengajuan','status'
+        ])->with([
+            'mahasiswa' => function ($q) {
+                $q->select(['nim', 'nama', 'semester']);
+            }
+        ])->get();
+        //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
+        return $this->sendResponse($data, 'Sukses mengambil data');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request)
-    {
-        try {
+    public function rekomendasi_create(Request $request) {
+        $data = $request -> validate([
+            'nim' => 'required',
+            'jenis_rekomendasi' => 'required',
+            'tanggal_pengajuan' => 'required',
+            'tanggal_persetujuan' => 'required',
+            'keterangan' => 'required',
+            'status' => 'required'
+        ]);
 
-            $update = Rekomendasi::where('nim', $request->nim)->update([
-                'topik_pertemuan' => $request->nama,
-                /// others
-            ]);
-        } catch (\Exception $e) {
-            return 'error';
-        }
-    }
+        Rekomendasi::create([
+            'nim' => $request -> nim,
+            'jenis_rekomendasi' => $request -> jenis_rekomendasi,
+            'tanggal_pengajuan' => $request -> tanggal_pengajuan,
+            'tanggal_persetujuan' => $request -> tanggal_persetujuan,
+            'keterangan' => $request -> keterang,
+            'status' => $request -> status
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function delete(Request $request)
-    {
-        try {
+        return $this->sendResponse($data, 'Sukses Membuat Data!');
+    }    
 
-            $getId = Rekomendasi::findOrFail($request->id)->delete();
-            return 'success';
-        } catch (\Exception $e) {
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(Request $request)
+    // {
+    //     try {
 
-            return 'error';
-        }
-    }
+    //         $update = Rekomendasi::where('nim', $request->nim)->update([
+    //             'topik_pertemuan' => $request->nama,
+    //             /// others
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return 'error';
+    //     }
+    // }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function delete(Request $request)
+    // {
+    //     try {
+
+    //         $getId = Rekomendasi::findOrFail($request->id)->delete();
+    //         return 'success';
+    //     } catch (\Exception $e) {
+
+    //         return 'error';
+    //     }
+    // }
 }

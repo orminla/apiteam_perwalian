@@ -10,9 +10,11 @@ class Rekomendasi extends Model
     protected $table    = 'rekomendasi';
     protected $fillable = [
         'nim',
-        'tanggal',
-        'topik_pertemuan',
-        'status',
+        'jenis_rekomendasi',
+        'tanggal_pengajuan',
+        'tanggal_persetujuan',
+        'keterangan',
+        'status'
     ];
 
     public function mahasiswa()
