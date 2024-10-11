@@ -16,7 +16,7 @@ class RekomendasiController extends BaseController
             'nim','keterangan','tanggal_pengajuan','status'
         ])->with([
             'mahasiswa' => function ($q) {
-                $q->select(['nim', 'nama', 'semester']);
+                $q->select(['nama', 'semester']);
             }
         ])->get();
         //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
@@ -43,36 +43,5 @@ class RekomendasiController extends BaseController
         ]);
 
         return $this->sendResponse($data, 'Sukses Membuat Data!');
-    }    
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(Request $request)
-    // {
-    //     try {
-
-    //         $update = Rekomendasi::where('nim', $request->nim)->update([
-    //             'topik_pertemuan' => $request->nama,
-    //             /// others
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return 'error';
-    //     }
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function delete(Request $request)
-    // {
-    //     try {
-
-    //         $getId = Rekomendasi::findOrFail($request->id)->delete();
-    //         return 'success';
-    //     } catch (\Exception $e) {
-
-    //         return 'error';
-    //     }
-    // }
+    }
 }
