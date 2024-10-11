@@ -38,7 +38,7 @@ class RekomendasiController extends BaseController
             'jenis_rekomendasi' => $request -> jenis_rekomendasi,
             'tanggal_pengajuan' => $request -> tanggal_pengajuan,
             'tanggal_persetujuan' => $request -> tanggal_persetujuan,
-            'keterangan' => $request -> keterang,
+            'keterangan' => $request -> keterangan,
             'status' => $request -> status
         ]);
 
