@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Konsultasi extends Model
 {
     use HasFactory;
-
+    protected $table    = 'konsultasi';
     protected $fillable = [
         'nim',
-        'tanggal_konsultasi',
-        'materi_konsultasi',
+        'tanggal',
+        'materi',
     ];
 
     public function mahasiswa()

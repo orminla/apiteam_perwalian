@@ -7,63 +7,44 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Api\MahasiswaCollection;
 use Response;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Models\JanjiTemu;
 use App\Models\Rekomendasi;
 
 class JanjiTemuController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function janji_temu()
     {
-        //
+        $data = JanjiTemu::select([
+            'nim',
+            'tanggal',
+            'materi',
+            'status'
+        ])->with([
+            'mahasiswa' => function ($q) {
+                $q->select(['nim','nama']);
+            }
+        ])->get();
+        //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
+        return $this->sendResponse($data, 'Sukses mengambil data');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    //
+    public function janji_temu_create(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'nim' => 'required',
+            'tanggal' => 'required',
+            'materi' => 'required',
+            'status' => 'required'
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        JanjiTemu::create([
+            'nim' => $request->nim,
+            'tanggal' => $request->tanggal,
+            'materi' => $request->materi,
+            'status' => $request->status
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->sendResponse($data, 'Sukses Membuat Data!');
     }
 }

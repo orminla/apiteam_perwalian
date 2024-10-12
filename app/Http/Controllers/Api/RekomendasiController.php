@@ -10,6 +10,7 @@ use App\Models\Rekomendasi;
 
 class RekomendasiController extends BaseController
 {
+    //tampilkan rekomendasi
     public function rekomendasi()
     {
         $data = Rekomendasi::select([
@@ -23,6 +24,7 @@ class RekomendasiController extends BaseController
         return $this->sendResponse($data, 'Sukses mengambil data');
     }
 
+    //tambah rekomendasi
     public function rekomendasi_create(Request $request) {
         $data = $request -> validate([
             'nim' => 'required',

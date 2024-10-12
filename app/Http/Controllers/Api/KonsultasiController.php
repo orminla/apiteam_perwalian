@@ -10,59 +10,36 @@ use App\Models\Konsultasi;
 
 class KonsultasiController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function konsul()
     {
-        //
+        $data = Konsultasi::select([
+            'nim',
+            'tanggal',
+            'materi',
+        ])->with([
+            'mahasiswa' => function ($q) {
+                $q->select(['nama', 'semester','no_hp']);
+            }
+        ])->get();
+        //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
+        return $this->sendResponse($data, 'Sukses mengambil data');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    //
+    public function konsul_create(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'nim' => 'required',
+            'tanggal' => 'required',
+            'materi' => 'required'
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        Konsultasi::create([
+            'nim' => $request->nim,
+            'tanggal' => $request->tanggal,
+            'materi' => $request->materi
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->sendResponse($data, 'Sukses Membuat Data!');
     }
 }

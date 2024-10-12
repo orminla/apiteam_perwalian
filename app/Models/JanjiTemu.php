@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class JanjiTemu extends Model
 {
     use HasFactory;
-
+    protected $table    = 'janji_temu';
     protected $fillable = [
         'nim',
-        'jenis_rekomendasi',
-        'tanggal_pengajuan',
-        'tanggal_persetujuan',
-        'keterangan',
-        'status',
+        'tanggal',
+        'materi',
+        'status'
     ];
 
     public function mahasiswa()

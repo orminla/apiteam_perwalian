@@ -10,59 +10,36 @@ use App\Models\KHS;
 
 class KHSController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function khs()
     {
-        //
+        $data = KHS::select([
+            'nim','semester','tahun_ajaran','status'
+        ])->with([
+            'mahasiswa' => function ($q) {
+                $q->select(['nama', 'semester']);
+            }
+        ])->get();
+        //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
+        return $this->sendResponse($data, 'Sukses mengambil data');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    //
+    public function khs_create(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'nim' => 'required',
+            'semester' => 'required',
+            'tahun_ajaran' => 'required',
+            'status' => 'required'
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        KHS::create([
+            'nim' => $request->nim,
+            'semester' => $request->semester,
+            'tahun_ajaran' => $request->tahun_ajaran,
+            'status' => $request->status
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return $this->sendResponse($data, 'Sukses Membuat Data!');
     }
 }
