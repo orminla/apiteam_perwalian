@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('nim');
             $table->integer('semester');
             $table->string('tahun_ajaran');
-            $table->string('status');
+            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Proses']);
             $table->timestamps();
         });
 
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->dateTime('tanggal_pengajuan');
             $table->dateTime('tanggal_persetujuan');
             $table->text('keterangan');
-            $table->string('status');
+            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Proses']);
             $table->timestamps();
         });
 
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->integer('nim');
             $table->dateTime('tanggal');
             $table->text('materi');
-            $table->string('status');
+            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Proses']);
             $table->timestamps();
         });
     }
