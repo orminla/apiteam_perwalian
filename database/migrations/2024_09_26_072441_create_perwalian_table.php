@@ -20,6 +20,7 @@ return new class extends Migration
         });
 
         Schema::create('khs', function (Blueprint $table) {
+            $table->id();
             $table->integer('nim');
             $table->integer('semester');
             $table->string('tahun_ajaran');
@@ -28,6 +29,7 @@ return new class extends Migration
         });
 
         Schema::create('rekomendasi', function (Blueprint $table) {
+            // $table->id();
             $table->integer('nim');
             $table->string('jenis_rekomendasi');
             $table->dateTime('tanggal_pengajuan');
@@ -38,6 +40,7 @@ return new class extends Migration
         });
 
         Schema::create('janji_temu', function (Blueprint $table) {
+            //$table->id();
             $table->integer('nim');
             $table->dateTime('tanggal');
             $table->text('materi');
