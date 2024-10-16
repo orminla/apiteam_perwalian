@@ -15,8 +15,8 @@ Route::prefix('/mahasiswa')->group(function() {
 Route::prefix('sibaper')->group(function() {
     require __DIR__ .'\sibaper.php';
 });
-Route::prefix('sirekap')->group(function() {
-    require __DIR__ .'\sirekap.php';
+Route::prefix('arsip')->group(function() {
+    require __DIR__ .'\arsip.php';
 });
 Route::prefix('perwalian')->group(function() {
     require __DIR__ .'\perwalian.php';

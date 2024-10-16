@@ -13,8 +13,8 @@ Route::post('/import-data-mahasiswa', [MahasiswaController::class, 'import'])->n
 
 require __DIR__ .'\auth.php';
 
-Route::middleware('auth:sanctum')->group( function () {
-    Route::prefix('api')->group(function() {
-        require __DIR__ .'\api\api.php';
-    });
-});
+// // Route::middleware('auth:sanctum')->group( function () {
+//     Route::prefix('api')->group(function() {
+//         require __DIR__ .'\api\api.php';
+//     });
+// // });
