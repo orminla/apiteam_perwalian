@@ -18,10 +18,24 @@ class KonsultasiController extends BaseController
             'materi',
         ])->with([
             'mahasiswa' => function ($q) {
-                $q->select(['nama', 'semester','no_hp']);
+                $q->select(['nim','nama', 'semester','no_hp']);
             }
         ])->get();
+
         //$data->makeHidden(['jenis_rekomendasi', 'tanggal_persetujuan']);
+        
+        //tampilkan data setara
+        // $result = $data->map(function ($konsultasi) {
+        //     return [
+        //         'nim' => $konsultasi->nim,
+        //         'tanggal' => $konsultasi->tanggal,
+        //         'materi' => $konsultasi->materi,
+        //         'nama' => $konsultasi->mahasiswa->nama,
+        //         'semester' => $konsultasi->mahasiswa->semester,
+        //         'no_hp' => $konsultasi->mahasiswa->no_hp,
+        //     ];
+        // });
+
         return $this->sendResponse($data, 'Sukses mengambil data');
     }
 

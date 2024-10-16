@@ -32,6 +32,7 @@ class JanjiTemuController extends BaseController
     public function janji_temu_create(Request $request)
     {
         $data = $request->validate([
+            'nama' => 'required',
             'nim' => 'required',
             'tanggal' => 'required',
             'materi' => 'required',
@@ -39,6 +40,7 @@ class JanjiTemuController extends BaseController
         ]);
 
         JanjiTemu::create([
+            'nama' => $request->nama,
             'nim' => $request->nim,
             'tanggal' => $request->tanggal,
             'materi' => $request->materi,

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->date('tanggal_refrensi')->nullable();
             $table->boolean('status_persetujuan');
             $table->date('tanggal_persetujuan');
+            //tambah tabel untuk ttd qr code
             $table->timestamps();
 
 
