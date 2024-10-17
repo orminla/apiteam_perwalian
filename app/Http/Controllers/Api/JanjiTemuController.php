@@ -35,14 +35,14 @@ class JanjiTemuController extends BaseController
             'nim' => 'required',
             'tanggal' => 'required',
             'materi' => 'required',
-            'status' => 'required'
+            // 'status' => 'required'
         ]);
 
         JanjiTemu::create([
             'nim' => $request->nim,
             'tanggal' => $request->tanggal,
             'materi' => $request->materi,
-            'status' => $request->status
+            // 'status' => $request->status
         ]);
 
         return $this->sendResponse($data, 'Sukses Membuat Data!');
